@@ -7,20 +7,11 @@ def main():
 
     # HTMLParser 인스턴스 생성
     parser = HTMLParser(url)
-
-    # 테이블 데이터 처리
-    table_data = parser.get_table_data(handle_colspan_and_rowspan)
-
-    for row in table_data:
-        print(row)
     
+    # 본문과 테이블 데이터를 담은 리스트를 가져옵니다.
+    content_with_tables = parser.get_content_with_tables()
 
-    # 테이블 헤더를 찾고, 바디 데이터를 매핑
-    # ...
-
-    # 예시 출력
-    # ...
-
-# 메인 스크립트 실행
+    print("its main")
+#    print(content_with_tables)
 if __name__ == "__main__":
     main()
