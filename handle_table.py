@@ -63,36 +63,4 @@ def handle_colspan_and_rowspan(table_soup):
 
 
 
-# 메인 함수
-def main():
-    # 웹 페이지의 URL
-    url = 'https://www.honestfund.kr/v2/terms/privacy'
 
-    # requests를 사용하여 웹 페이지의 HTML을 가져옵니다.
-    response = requests.get(url)
-
-    # BeautifulSoup 객체 생성
-    soup = BeautifulSoup(response.text, 'html.parser')
-
-    # 예시로 첫 번째 테이블을 사용합니다.
-    table_soup = soup.find('table')
-
-    # 테이블 헤더를 찾습니다. (첫 번째 행이라고 가정합니다)
-    header_soup = table_soup.find('thead').find_all('th')
-    headers = [th.get_text(strip=True) for th in header_soup]
-
-    # 테이블 바디를 찾습니다.
-    body_soup = table_soup.find('tbody')
-    table_data = handle_colspan_and_rowspan(body_soup)
-
-    # 각 행을 딕셔너리 형태로 변환 (키-값 쌍으로 매핑)
-    table_dicts = [dict(zip(headers, row)) for row in table_data]
-
-    # 예시 출력
-    for entry in table_dicts:
-        print(entry)
-
-
-# 메인 스크립트 실행
-if __name__ == "__main__":
-    main()
